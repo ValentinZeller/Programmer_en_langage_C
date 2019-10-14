@@ -7,3 +7,5 @@
 #relatif
 *.exe
 *.o
+*.layout
+*.depend
