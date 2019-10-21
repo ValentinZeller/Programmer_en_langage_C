@@ -1,102 +1,123 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>//macro pour appeler le fichier header math avec des prototypes de méthodes
+#include <math.h>
 
-#define NFOIS 5 //constante
-#define PI 3.14
-#define NOM "Zeller"
-#define CAR 'x'
-//# : macro utilisé dans la compilation par le pré processeur
-
-//Exemple de programme en C
+#define TAILLE 10
+//Structures Conditions et boucles
 
 int main()
 {
-    //Integer
-    short int nA;//short sn
-    int nB;
-    long int nC;//long ln
+    //Condition
+    int a=0,b=0,c=0,d=0;
+    if(a==b) {
+        printf("Ils sont egaux\n");
+    } else {
+        printf("Ils sont diff\n");
+    }
+    //Condition avec operateurs logiques
+    if ((a==b) && (a==c)) {
+        printf("Ils sont tous egaux\n");
+    } else {
+        printf("Ils sont tous differents\n");
+    }
 
-    const int cntT=10;
+    if((a==b) || (a==c)) {
+        printf("Ils sont egaux\n");
+    } else {
+        printf("Ils sont diff\n");
+    }
 
-    volatile int nVolB;
+    if((a==b) || (a==c)) {
+        printf("Ils sont egaux\n");
+    } else if((a==c)&& (a!=d)){
+        printf("blabla...\n");
+    }
 
-    static int nStatB;
+    //Boucle
+    int i=0;
 
-    printf("Taille de a : %d\n",sizeof(nA));
-    printf("Taille de b : %d\n",sizeof(nB));
-    printf("Taille de c : %d\n",sizeof(nC));
+    for(i=0;i<TAILLE;i++) {
+        printf("Hello world\n");
+    }
 
-    //Real
-    float fltReelSimple;
-    double dblReelDouble;
-    //long double
-    printf("Taille de reel simple : %d\n",sizeof(fltReelSimple));
-    printf("Taille de reel double : %d\n",sizeof(dblReelDouble));
+    //TQ
+    i=0;
+    while(i<TAILLE){
+        printf("Hello world\n");
+        i++;
+    }
 
-    //Character
-    char cCaractere;
-    printf("Taille de caractere : %d\n",sizeof(cCaractere));
+    //Faire TQ
+    i=0;
+    do {
+        printf("Hello world\n");
+        i++;
+    } while(i<TAILLE);
 
-    //Tester Define
-    printf("NFOIS : %d\n",NFOIS);
-    printf("PI : %f\n",PI);
-    printf("NOM : %s\n",NOM);
-    printf("CAR : %c\n",CAR);
+    //Cas alternative de la condition
+    int choix=-1;
+    printf("Veuillez entrez votre choix\n");
+    scanf("%d",&choix);
+    switch (choix) {
+        case 0:printf("Quitter\n");break;
+        case 1:printf("Calculer\n");break;
+        case 2:printf("Jouer\n");break;
+        default:printf("Default\n");
+    }
 
-    //Opérateurs
-    int nI=0;
-    ++nI; //pré-incrémentation
-    nI++; //post-incrémentation
-    // % modulo
-    // / division
+    //test ? instruction1 : instruction 2
+    b = a==b? printf("egaux\n"):printf("diff\n");
 
-    //Cast
-    long double ldblLongDouble=105.89522;
-    printf("Val de long double : %lf", (double)ldblLongDouble);
-
-    //Opérateurs relationnels
-    // < > <= >= == !=
-
-    //Opérateurs logiques
-    // & ET && ET sans forcément tout vérifier
-    // | ET || OU sans forcément tout vérifier
-    // ! NON
-
-    //Factorisation opérateurs
-    // += -= *= /= %= ...
-
-    //Exemple d'une condition avec operateur logique inclus sinon
-    //Exemple d'une condition sans operateur logique
-    //Exemple de boucle pour
-    //Exemple de boucle tantque
-    //Exemple de boucle faire tantque
-    //Exemple avec l'opérateur ternaire
-
-    return 0;
-}
-
-/*void main()
-{
-        int i;
-    float x;
-    float racx;
-
-    printf("Bonjour\n");
-
-    racx=sqrt(x);
-    printf("Calcul de %d racine carré \n",NFOIS);
-    for (i=0; i<NFOIS; i++)
-    {
-        printf("Donnez un nombre : ");
-        scanf("%f",&x); //fonction servent à récupérer la saisie de donnée d'un certain type
-        if (x<0.0) //.0 important car c'est un réel
-            printf("Le nombre %f ne possede pas de racine carree\n",x);
-        else
-        {
-            racx = sqrt(x);
-            printf("Le nombre %f a pour racine carree : %f\n",x,racx);
+    //Instruction break;
+    for(i=0;i<TAILLE;i++) {
+        printf("Hello world\n");
+        if (i==3){
+            break;
         }
     }
-    printf("Travail termine - Au revoir"); //Pas d'accent console
-}*/
+
+    //Instruction continue
+        for(i=0;i<TAILLE;i++) {
+        printf("Hello world\n");
+        if (i<3){
+            printf("continue\n");
+            continue;
+        }
+    }
+
+
+
+    /*
+    //Exemple d'une condition inclus sinon
+    int nCond;
+    printf("Entrez un nombre");
+    scanf("%d",&nCond);
+    if (nCond > 1 && nCond < 10000000) {
+        printf("Le nombre est plus grand que 1\n");
+    } else {
+        printf("Le nombre est plus petit ou egal a 1\n");
+    }
+    //Exemple d'une condition sans operateur logique
+    if (nCond) {
+        printf("Existe\n");
+    }
+    //Exemple de boucle pour
+    for (int i = 0;i<=10;i++) {
+        printf("%d\n",i);
+    }
+    //Exemple de boucle tantque
+    while (nCond <= 10) {
+        printf("Le nombre augmente jusqu'a 10 : %d\n",nCond);
+        nCond++;
+    }
+    //Exemple de boucle faire tantque
+    do {
+        printf("Le nombre est trop grand : %d\n",nCond);
+        nCond--;
+    } while (nCond > 0);
+    //Exemple avec l'opérateur ternaire
+    int nAge;
+    nAge = (nCond = 0) ? 18 : 17;
+    printf("%d\n",nAge);*/
+    return 0;
+}
