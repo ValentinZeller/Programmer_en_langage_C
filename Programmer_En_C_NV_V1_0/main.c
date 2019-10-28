@@ -1,84 +1,85 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <string.h>
 
-#define TAILLE 100
-#define TAILLENOM 100
-#define TAILLEPRENOM 100
-#define TAILLEADRESSE 255
-#define TAILLECP 10
-#define TAILLEVILLE 40
+#define TAILLE 10
+
+//Prototypes
+void initMatrice(int nMatriceEntier[][TAILLE],int nValInit);
+void afficheMatrice(int nMatriceEntier[][TAILLE]);
+void initMatrice2(int nMatriceEntier[][TAILLE],int nNVal,int nValInit);
+int nSommeEltMatrice(int nMatriceEntier[][TAILLE],int nNVal);
+//Les tableaux 2 dim, fonctions et prodcï¿½dures
 
 int main()
 {
-    //Tout ce qui est déclaré est déclaré dans la pile
-    /*int nTabInteger[TAILLE];
-    float fltTabFloat[TAILLE];
-    double dblTabDouble[TAILLE];
+    //Tableau 2 dim entier
+    int nMatriceEntier[TAILLE][TAILLE];
+    int nMatriceEntier2[TAILLE][TAILLE];
 
-    char cTabCar[TAILLE];
+    initMatrice(nMatriceEntier,0);
+    afficheMatrice(nMatriceEntier);
+    initMatrice2(nMatriceEntier2,5,10);
 
-    int nI = 0;
-    for(nI=0;nI<TAILLE;nI++) {
-        nTabInteger[nI]=0;
-        fltTabFloat[nI]=0.0;
-        dblTabDouble[nI]=0.0;
-        cTabCar[nI]='\0'; // '\0' caractere de fin de chaine
-    }*/
-    //Creation de carte d'identite
-    //Saisir numero d'identifiant, nom, prenom, ddn, adresse postale : numero, nom de la rue, code postal, ville
-    static int nId = 0; //Persistance : donnée conservée à la même adresse mémoire peu importe la fonction
-    char cNom[TAILLENOM];
-    char cPrenom[TAILLEPRENOM];
-    char cDDN[10];
-    char cAdresse[TAILLEADRESSE];
-    char cCP[TAILLECP];
-    char cVille[TAILLEVILLE];
+    int i,j;
+    //Affichage Matrice
+    for(i=0;i<5;i++) {
+        for (j=0;j<TAILLE;j++) {
+            printf("%d",nMatriceEntier2[i][j]);
+        }
+        printf("\n");
+    }
 
-    const char FinDeSaisie = 'n';
-    char cContinue[TAILLE];
+    int nResSommeMatrice = nSommeEltMatrice(nMatriceEntier2,5);
+    printf("Resultat de la somme de notre matrice : %d\n",nResSommeMatrice);
 
-    do {
-        printf("Carte d'identite \n");
-        printf("Saisir Nom ? \n");
-        fgets(cNom,TAILLENOM,stdin);
-
-        fflush(stdin);
-        printf("Saisir Prenom ? \n");
-        fgets(cPrenom,TAILLEPRENOM,stdin);
-
-        fflush(stdin);
-        printf("Saisir Date de naissance ? \n");
-        gets(cDDN);
-
-        fflush(stdin);
-        printf("Saisir Adresse ? \n");
-        fgets(cAdresse,TAILLEADRESSE,stdin);
-
-        fflush(stdin);
-        printf("Saisir Code postal ? \n");
-        scanf("%5s",cCP);
-
-        fflush(stdin);
-        printf("Saiisir Ville ? \n");
-        fgets(cVille, TAILLEVILLE,stdin);
-
-        ++nId;
-
-        //affichage
-        printf("Identite :\n");
-        printf("%d ",nId);
-        printf("%s %s",cNom,cPrenom);
-        printf("Ne.e le %s \n",cDDN);
-        printf("Adresse : %s %s %s\n",cAdresse,cCP,cVille);
-        do {
-        printf("Nouvelle saisie ? (o/n)\n");
-        scanf("%s",cContinue);
-        fflush(stdin);
-        } while (strcmp(cContinue,"o") && strcmp(cContinue,"n"));
-
-    } while (cContinue[0]!=FinDeSaisie);
 
     return 0;
+}
+//ImplÃ©menation des fonctions
+//ProcÃ©dures
+
+//Init
+void initMatrice(int nMatriceEntier[][TAILLE],int nValInit) {
+  int i,j;
+
+  for(i=0;i<TAILLE;i++) {
+      for (j=0;j<TAILLE;j++) {
+          nMatriceEntier[i][j] = nValInit;
+      }
+  }
+}
+void initMatrice2(int nMatriceEntier[][TAILLE],int nNVal,int nValInit) {
+  int i,j;
+
+  for(i=0;i<nNVal;i++) {
+      for (j=0;j<TAILLE;j++) {
+          nMatriceEntier[i][j] = nValInit;
+      }
+  }
+}
+
+//Calcul
+int nSommeEltMatrice(int nMatriceEntier[][TAILLE],int nNVal) {
+  int i,j;
+  int nResSommeMatrice = 0;
+
+  for(i=0;i<nNVal;i++) {
+      for (j=0;j<TAILLE;j++) {
+          nResSommeMatrice += nMatriceEntier[i][j];
+      }
+  }
+  return nResSommeMatrice;
+}
+
+//Layout
+void afficheMatrice(int nMatriceEntier[][TAILLE]) {
+    int i,j;
+    //Affichage Matrice
+    for(i=0;i<TAILLE;i++) {
+        for (j=0;j<TAILLE;j++) {
+            printf("%d",nMatriceEntier[i][j]);
+        }
+        printf("\n");
+    }
 }
