@@ -4,7 +4,7 @@
 
 #define TAILLE 3
 #define NBSYMBOL 2
-#define MAXTURN 9
+#define MAXTURN 8
 
 //Prototypes
 void initMorpion(char cMorpion[TAILLE][TAILLE]);
