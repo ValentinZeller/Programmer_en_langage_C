@@ -2,84 +2,48 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define TAILLE 10
 
-//Prototypes
-void initMatrice(int nMatriceEntier[][TAILLE],int nValInit);
-void afficheMatrice(int nMatriceEntier[][TAILLE]);
-void initMatrice2(int nMatriceEntier[][TAILLE],int nNVal,int nValInit);
-int nSommeEltMatrice(int nMatriceEntier[][TAILLE],int nNVal);
-//Les tableaux 2 dim, fonctions et prodc�dures
+
+
+//Pointeurs
+
+int sommeEntiers(int nA, int nB);
+void somEntiers(int nA, int nB, int *pnRes);
 
 int main()
 {
-    //Tableau 2 dim entier
-    int nMatriceEntier[TAILLE][TAILLE];
-    int nMatriceEntier2[TAILLE][TAILLE];
+    //Déclaration Pointeur
+    //Un pointeur pointe vers une référence mémoire
+    //Un pointeur lors de son initialisation doit avoir une référence NULL
+    int *pnPointeurEntier=NULL;
+    int nEntier=10;
 
-    initMatrice(nMatriceEntier,0);
-    afficheMatrice(nMatriceEntier);
-    initMatrice2(nMatriceEntier2,5,10);
 
-    int i,j;
-    //Affichage Matrice
-    for(i=0;i<5;i++) {
-        for (j=0;j<TAILLE;j++) {
-            printf("%d",nMatriceEntier2[i][j]);
-        }
-        printf("\n");
-    }
+    //Pointeur pointe sur référence nEntier
+    pnPointeurEntier = &nEntier;
+    *pnPointeurEntier =88;
+    nEntier = 500;
 
-    int nResSommeMatrice = nSommeEltMatrice(nMatriceEntier2,5);
-    printf("Resultat de la somme de notre matrice : %d\n",nResSommeMatrice);
+    //int **ppnEntier=&pnPointeurEntier;
 
+    int nEntier2 = 200;
+
+    nEntier = sommeEntiers(10,88);
+
+    printf("%d\n",nEntier);
+
+    int nResSomme = 0;
+
+    somEntiers(56,12,&nResSomme);
+    printf("%d\n",nResSomme);
 
     return 0;
 }
-//Implémenation des fonctions
-//Procédures
 
-//Init
-void initMatrice(int nMatriceEntier[][TAILLE],int nValInit) {
-  int i,j;
-
-  for(i=0;i<TAILLE;i++) {
-      for (j=0;j<TAILLE;j++) {
-          nMatriceEntier[i][j] = nValInit;
-      }
-  }
-}
-void initMatrice2(int nMatriceEntier[][TAILLE],int nNVal,int nValInit) {
-  int i,j;
-
-  for(i=0;i<nNVal;i++) {
-      for (j=0;j<TAILLE;j++) {
-          nMatriceEntier[i][j] = nValInit;
-      }
-  }
+int sommeEntiers(int nA, int nB) {
+    return nA+nB;
 }
 
-//Calcul
-int nSommeEltMatrice(int nMatriceEntier[][TAILLE],int nNVal) {
-  int i,j;
-  int nResSommeMatrice = 0;
-
-  for(i=0;i<nNVal;i++) {
-      for (j=0;j<TAILLE;j++) {
-          nResSommeMatrice += nMatriceEntier[i][j];
-      }
-  }
-  return nResSommeMatrice;
-}
-
-//Layout
-void afficheMatrice(int nMatriceEntier[][TAILLE]) {
-    int i,j;
-    //Affichage Matrice
-    for(i=0;i<TAILLE;i++) {
-        for (j=0;j<TAILLE;j++) {
-            printf("%d",nMatriceEntier[i][j]);
-        }
-        printf("\n");
-    }
+void somEntiers(int nA, int nB, int *pnRes){ //* = Passage d'argument par adresse
+    *pnRes = nA+nB;
 }
