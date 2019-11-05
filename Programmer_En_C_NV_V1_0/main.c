@@ -2,48 +2,57 @@
 #include <stdlib.h>
 #include <math.h>
 
+//Exercices
 
+void f1();
+void f2(int nA);
+int f3(int nA);
+void fct(int p);
+void appel();
 
-
-//Pointeurs
-
-int sommeEntiers(int nA, int nB);
-void somEntiers(int nA, int nB, int *pnRes);
+int n=5;
+static long lnAppel=0;
 
 int main()
 {
-    //Déclaration Pointeur
-    //Un pointeur pointe vers une référence mémoire
-    //Un pointeur lors de son initialisation doit avoir une référence NULL
-    int *pnPointeurEntier=NULL;
-    int nEntier=10;
 
+    f1();
+    f2(3);
+    f3(2);
 
-    //Pointeur pointe sur référence nEntier
-    pnPointeurEntier = &nEntier;
-    *pnPointeurEntier =88;
-    nEntier = 500;
+    int n = 3;
+    fct(n); //Affiche 5 n(globale) puis 3(locale)
+    appel();
+    appel();
 
-    //int **ppnEntier=&pnPointeurEntier;
-
-    int nEntier2 = 200;
-
-    nEntier = sommeEntiers(10,88);
-
-    printf("%d\n",nEntier);
-
-    int nResSomme = 0;
-
-    somEntiers(56,12,&nResSomme);
-    printf("%d\n",nResSomme);
+    printf("%d\n",lnAppel);
 
     return 0;
 }
 
-int sommeEntiers(int nA, int nB) {
-    return nA+nB;
+void f1() {
+    printf("Bonjour\n");
 }
 
-void somEntiers(int nA, int nB, int *pnRes){ //* = Passage d'argument par adresse
-    *pnRes = nA+nB;
+void f2(int nA) {
+    int i = 0;
+    for(i=0;i<nA;i++) {
+        printf("Bonjour\n");
+    }
+}
+
+int f3(int nA) {
+    int i = 0;
+    for(i=0;i<nA;i++) {
+        printf("Bonjour\n");
+    }
+    return 0;
+}
+
+void fct(int p) {
+    printf("%d %d\n",n,p);
+}
+
+void appel() {
+    lnAppel++;
 }
