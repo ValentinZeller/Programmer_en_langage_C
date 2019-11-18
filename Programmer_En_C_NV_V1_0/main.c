@@ -1,66 +1,67 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
 
-//Exercices
+#define TAILLE 100
 
-void f1();
-void f2(int nA);
-int f3(int nA);
-void fct(int p);
-void appel();
+char *ctabCar(char cChaine[TAILLE]);
+int *ntabInt(int nEntier[TAILLE]);
+int *ntabInt2D(int nEntier[10][10]);
 
+// Pointeurs
 
-int n=5; //Exercice 2 : variable globale
+int main() {
+    /* char cSaisie[TAILLE]={"Votre Nom"};
 
-int main()
-{
-    int i=0;
+    char *cNom;
+    //&cNom[1] : décalage d'1 octet, 4 si c'était entier
 
-    f1(); //Exercice 1 bonjour 1 fois
-    f2(3); //Exercice 1 bonjour autant de fois que le paramètre
-    f3(2); //Exercice 1  bonjour autant de fois que le paramètre et return 0
+    cNom=ctabCar(cSaisie);
+    printf("Votre nom %s\n",cNom); */
 
-    int n = 3; //Exercice 2 :  variable locale
-    fct(n); //Exercice 2 : Affiche 5 (n globale) puis 3(n locale)
+    int nEntier[100] = {0}; //= faire la boucle d'initialisation
+    ntabInt(nEntier);
 
-    for (i=0;i<1000;i++) {//Exercice 3
-        appel();
+    //int nTabEntier[][] = { {0,1,2,...},{0,1,2,...} }
+    int nEntier2[10][10] = {{0}};
+    int *pInt = ntabInt2D(nEntier2);
+
+    int i;
+    int *p;
+    for (i=0;i<TAILLE;i++) {
+        printf("%d ",*(pInt)++);
+        p=pInt;
     }
-
 
     return 0;
 }
 
-void f1() {// Exercice 1 : bonjour une fois
-    printf("Bonjour\n");
+
+//Tableau = Pointeur
+char * ctabCar(char cChaine[TAILLE]) {
+    printf("Entrez votre nom\n");
+    scanf("%s",cChaine);
+    return cChaine;
 }
 
-void f2(int nA) {// Exercice 1 : bonjour nA fois
-    int i = 0;
-    for(i=0;i<nA;i++) {
-        printf("Bonjour\n");
+int * ntabInt(int nEntier[TAILLE]) {
+    int i;
+
+    for (i=0;i<TAILLE;i++) {
+        *(nEntier+1)=0;//nEntier[i]=0
     }
+
+    return nEntier;
 }
 
-int f3(int nA) { // Exercice 1 : bonjour nA fois et return 0
-    int i = 0;
-    for(i=0;i<nA;i++) {
-        printf("Bonjour\n");
+
+int * ntabInt2D(int nEntier[10][10]) {
+    int i,j;
+    for (i=0;i<10;i++) {
+        for (j=0;j<10;j++) {
+            *(*(nEntier+i)+j)=10;//nEntier[i][j]=10;
+        }
     }
-    return 0;
-}
 
-void fct(int p) { //Affiche 5 (n globale) puis 3(n locale)
-    printf("%d %d\n",n,p);
-}
-
-void appel() { //Exercice 3
-    static long lnAppel=0;
-    static double fltPower=0;
-    lnAppel++;
-    if (lnAppel%(long)pow(10.0,fltPower) == 0) {
-        printf("*** appel %d fois ***\n",(int)lnAppel);
-        fltPower++;
-    }
+    return (int*)nEntier;//Tableau 2D != Pointeur donc cast
 }
