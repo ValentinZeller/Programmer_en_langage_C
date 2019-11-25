@@ -1,85 +1,75 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define TAILLE 100
-//Les Typedef
+#define TAILLE 2
 
-typedef struct tPoint{//Signature du typdef
+//Exercices sur les types
+typedef struct point {
+    int num;
+    float x;
+    float y;
+}point;
 
-    int nX;
-    int nY;
-
-}tPoint,*ptPoint;//Declaration du nouveau type
-
-
-
-typedef struct tDroite{
-
-    tPoint tabPoint[TAILLE];
-
-}tDroite;
-
-
-//Les enumerations
-typedef  enum couleur{jaune,rouge,bleu,vert} couleur;
-//Commence a index 0
-// Si typedef  enum couleur{jaune=1,rouge=2,bleu,vert} couleur;
-//Alors index commence a 1
-
-
-typedef struct tInfoDroite{
-
-    char cNomDroite[100];
-    tDroite dr;
-    couleur coul;
-
-}tInfoDroite;
-
-
-
+void Exercice1();
+void Exercice2();
+void saisieTabPoint(point *tabPoint,int taille);
+void affichageTabPoint(point *tabPoint,int taille);
 
 int main()
 {
-    //renvoie a la declaration de l'alias de la structure tPoint
-    ptPoint pPoint=NULL;//Cette declaration correspond à un pointeur.
+    Exercice1();
+    Exercice2();
+    return 0;
+}
 
-
-    //Creation d'une varialbe de type tPoint
-
-    tPoint pts={0,0}; //Initialisation des membres de la structure
-
-    pPoint=&pts;
-
-    printf("x:%d\n",pPoint->nX);
-    printf("y:%d\n",pPoint->nY);
-
-
+void Exercice1() {
+    point tabPoint[TAILLE] = {0};
     int i=0;
-    tDroite dr;
+    for (i=0;i<TAILLE;i++) {
+        tabPoint[i].num = i;
 
-    for(i=0;i<TAILLE;i++){
+        printf("Veuillez entrez la coord x du point %d \n",tabPoint[i].num);
+        scanf("%f",&tabPoint[i].x);
 
-        dr.tabPoint[i]=pts;
-
+        printf("Veuillez entrez la coord y du point %d \n",tabPoint[i].num);
+        scanf("%f",&tabPoint[i].y);
+        printf("\n");
     }
 
-    tInfoDroite iDroite={"segment",{0,0,1,2},jaune};//Peut generer un warning car nous n'initialisons pas les 100 valeurs.
-    //Initilisation d'un membre de type tInfoDroite
-
-
-    for(i=0;i<TAILLE;i++){
-
-        printf("Nom de la droite : %s", iDroite.cNomDroite);
-        printf("x: %d", iDroite.dr.tabPoint[i].nX);
-        printf("y: %d", iDroite.dr.tabPoint[i].nY);
-        printf("y: %d", iDroite.coul);//Cela donne id(int) de la couleur
-
+    for (i=0;i<TAILLE;i++) {
+        printf("Point : %d\n",tabPoint[i].num);
+        printf("Coord x : %1.1f\n",tabPoint[i].x);
+        printf("Coord y : %1.1f\n",tabPoint[i].y);
+        printf("\n");
     }
+}
 
+void Exercice2() {
+    point tabPoint[] = {0};
+    saisieTabPoint(tabPoint,TAILLE);
+    affichageTabPoint(tabPoint,TAILLE);
+}
 
+void saisieTabPoint(point *tabPoint,int taille) {
+    int i=0;
+    for (i=0;i<taille;i++) {
+        tabPoint[i].num = i;
 
+        printf("Veuillez entrez la coord x du point %d \n",tabPoint[i].num);
+        scanf("%f",&tabPoint[i].x);
 
+        printf("Veuillez entrez la coord y du point %d \n",tabPoint[i].num);
+        scanf("%f",&tabPoint[i].y);
+        printf("\n");
+    }
+}
 
-
-   return 0;
+void affichageTabPoint(point *tabPoint,int taille) {
+    int i=0;
+    for (i=0;i<taille;i++) {
+        printf("Point : %d\n",tabPoint[i].num);
+        printf("Coord x : %1.1f\n",tabPoint[i].x);
+        printf("Coord y : %1.1f\n",tabPoint[i].y);
+        printf("\n");
+    }
 }
