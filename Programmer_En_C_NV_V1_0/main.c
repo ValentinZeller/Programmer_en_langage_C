@@ -52,6 +52,7 @@ int main()
         colorCode(cTabSecret,cTabTentative,TAILLECODE,nTabColor,nEssai);
 
         //Affichage des precedents codes saisis par l'utilisateur
+        system("cls");
         color(JAUNE,0);
         printf("\nEssais : \n");
         afficheEssais(cTabEssais,nTabColor,nEssai+1,TAILLECODE);
