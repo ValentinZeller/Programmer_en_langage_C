@@ -2,18 +2,18 @@
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
-#include <string.h>
 
 #define VERT 2
 #define JAUNE 14
 #define GRISCLAIR 7
+#define ROUGE 12
 
 #define TAILLECODE 4
 #define NBESSAIS 13
 
 
 void initRandomCode(char cTabSecret[TAILLECODE],int taille);
-void initTabColor(int nTabColor[NBESSAIS][TAILLECODE+1]);
+void initTabColor(int nTabColor[NBESSAIS][TAILLECODE+1],int taille);
 void saisieTentative(char cTabTentative[TAILLECODE],int taille);
 void afficheEssais(char cTabEssais[NBESSAIS][TAILLECODE+1],int nTabColor[NBESSAIS][TAILLECODE+1],int nb,int taille);
 void colorCode(char cTabSecret[TAILLECODE+1],char cTabTentative[TAILLECODE+1],int taille,int nTabColor[NBESSAIS][TAILLECODE+1],int nEssai);
@@ -38,7 +38,7 @@ int main()
     int nEssai = 1;//Numero de l'essai en cours, inferieur à 12
     int verif = 0;//Stocke si l'utilisateur a trouve le code ou non
 
-    initTabColor(nTabColor);
+    initTabColor(nTabColor,TAILLECODE);
     initRandomCode(cTabSecret,TAILLECODE);
 
     while (nEssai<NBESSAIS && verif != TAILLECODE*VERT) {
@@ -52,6 +52,7 @@ int main()
         colorCode(cTabSecret,cTabTentative,TAILLECODE,nTabColor,nEssai);
 
         //Affichage des precedents codes saisis par l'utilisateur
+        color(JAUNE,0);
         printf("\nEssais : \n");
         afficheEssais(cTabEssais,nTabColor,nEssai+1,TAILLECODE);
         printf("\n");
@@ -59,16 +60,22 @@ int main()
         nEssai++;
         verif = verifCode(nTabColor,nEssai-1);
         if (verif != TAILLECODE*VERT) {
+            color(ROUGE,0);
             printf("Il reste %d essais\n",NBESSAIS-nEssai);
+            color(GRISCLAIR,0);
         }
     }
 
 
     if (verif == TAILLECODE*VERT) {
-        printf("Gagne\n");
+        color(0,VERT);
+        printf(" Gagne \n");
+        color(GRISCLAIR,0);
     } else {
-        printf("Perdu\n");
-        printf("Le code etait %s\n",cTabSecret);
+        color(0,ROUGE);
+        printf(" Perdu \n");
+        printf(" Le code etait %s \n",cTabSecret);
+        color(GRISCLAIR,0);
     }
 }
 
@@ -83,12 +90,12 @@ void initRandomCode(char cTabSecret[TAILLECODE],int taille) {
     cTabSecret[TAILLECODE] = '\0';
 }
 
-void initTabColor(int nTabColor[NBESSAIS][TAILLECODE+1]) {
+void initTabColor(int nTabColor[NBESSAIS][TAILLECODE+1],int taille) {
 //BUT : Initialisation du tableau à la couleur grise (pas d'indication)
     int i=0;
     int j=0;
     for (i=0;i<NBESSAIS;i++) {
-        for (j=0;j<TAILLECODE;j++) {
+        for (j=0;j<taille;j++) {
             nTabColor[i][j] = GRISCLAIR;
         }
     }
@@ -101,7 +108,7 @@ void saisieTentative(char cTabTentative[TAILLECODE],int taille) {
     fflush(stdin);
     do {
         printf("Entrez un code de 4 chiffres (0-9)\n");
-        fgets(cTabTentative,5,stdin);
+        fgets(cTabTentative,5,stdin); //L'utilisateur saisit 4 caracteres
         nSaisieValide = 0;
         for (i=0;i<taille;i++) {//Verification que chaque caractere saisie est entre 0 et 9
             if (cTabTentative[i] >= '0' && cTabTentative[i] <= '9') {
@@ -123,12 +130,18 @@ int verifCode(int nTabColor[NBESSAIS][TAILLECODE+1],int nEssai) {
 
 void colorCode(char cTabSecret[TAILLECODE+1],char cTabTentative[TAILLECODE+1],int taille,int nTabColor[NBESSAIS][TAILLECODE+1],int nEssai) {
 //BUT : Determine les couleurs du code saisie en fonction de la valeur et du placement (bien place = vert, mal place = jaune)
+//ENTREE : cTabSecret : code secret
+//         cTabTentative : saisie utilisateur
+//          taille : taille des tableaux ici TAILLECODE
+//          nTabColor : pour chaque valeur de chaque tentative, stocke la couleur (initialisée à gris)
+//          nEssai : Numero de la tentative en cours,
     int pos = 0;
     int trouve = 0;
     int i=0;
 
     for (i=0;i<taille;i++) {
         if (cTabSecret[i] == cTabTentative[i]) {
+        //Même valeur et bien placee
             trouve = 1;
             cTabTentative[i] = (int)"-1";
             nTabColor[nEssai][i] = VERT;
@@ -136,6 +149,7 @@ void colorCode(char cTabSecret[TAILLECODE+1],char cTabTentative[TAILLECODE+1],in
             pos = 0;
             while (trouve == 0 && pos < taille) {
                 if (cTabSecret[i] == cTabTentative[pos]) {
+                    //Même valeur et mal placee
                     cTabTentative[pos] = (int)"-1";
                     trouve = 1;
                     nTabColor[nEssai][pos] = JAUNE;
@@ -146,6 +160,8 @@ void colorCode(char cTabSecret[TAILLECODE+1],char cTabTentative[TAILLECODE+1],in
         trouve = 0;
     }
 }
+
+
 
 void afficheEssais(char cTabEssais[NBESSAIS][TAILLECODE+1],int nTabColor[NBESSAIS][TAILLECODE+1],int nb,int taille) {
 //BUT : Affiche toutes les codes saisies par l'utilisateur
