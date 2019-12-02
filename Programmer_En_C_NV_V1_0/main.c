@@ -1,75 +1,59 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define TAILLE 2
+#define TAILLE 20
 
-//Exercices sur les types
-typedef struct point {
-    int num;
-    float x;
-    float y;
-}point;
-
-void Exercice1();
-void Exercice2();
-void saisieTabPoint(point *tabPoint,int taille);
-void affichageTabPoint(point *tabPoint,int taille);
-
-int main()
+int main ()
 {
-    Exercice1();
-    Exercice2();
-    return 0;
+  FILE * pFile;
+  /* Mode texte */
+  char cSaisie[TAILLE];
+  char cAutre[TAILLE];
+
+
+  //Saisie utilisateur
+  printf("Veuillez saisir un texte a inserer\n");
+  fgets(cSaisie,TAILLE,stdin);
+  //Ouverture du fichier
+  pFile = fopen("myfile.txt", "w");
+
+  //Ecriture dans le fichier
+  if (pFile != NULL) {
+    fprintf(pFile,"%s\n",cSaisie);
+    fclose (pFile);
+  }
+
+  pFile = fopen("myfile.txt","r");
+  printf("Le fichier contient :\n");
+
+  //Lecture du fichier
+  if (pFile != NULL) {
+    fgets(cAutre,TAILLE,pFile);
+    printf("%s",cAutre);
+    fclose (pFile);
+  }
+
+
+  /*Mode binaire */
+  int nSaisie;
+  int nAutre;
+
+  printf("Veuillez saisir un entier a inserer\n");
+  scanf("%d",&nSaisie);
+  //fgets(cSaisie,TAILLE,stdin);
+  pFile = fopen("myfile.bin","wb");
+  if (pFile != NULL ) {
+    fwrite(&nSaisie,sizeof(int),sizeof(nSaisie),pFile);
+    fclose(pFile);
+  }
+  printf("Le fichier contient :\n");
+  pFile = fopen("myfile.bin","rb");
+  if (pFile != NULL) {
+    fread(&nAutre,sizeof(int),sizeof(nSaisie),pFile);
+    printf("%d",nAutre);
+    fclose(pFile);
+  }
+
+  return 0;
 }
 
-void Exercice1() {
-    point tabPoint[TAILLE] = {0};
-    int i=0;
-    for (i=0;i<TAILLE;i++) {
-        tabPoint[i].num = i;
-
-        printf("Veuillez entrez la coord x du point %d \n",tabPoint[i].num);
-        scanf("%f",&tabPoint[i].x);
-
-        printf("Veuillez entrez la coord y du point %d \n",tabPoint[i].num);
-        scanf("%f",&tabPoint[i].y);
-        printf("\n");
-    }
-
-    for (i=0;i<TAILLE;i++) {
-        printf("Point : %d\n",tabPoint[i].num);
-        printf("Coord x : %1.1f\n",tabPoint[i].x);
-        printf("Coord y : %1.1f\n",tabPoint[i].y);
-        printf("\n");
-    }
-}
-
-void Exercice2() {
-    point tabPoint[] = {0};
-    saisieTabPoint(tabPoint,TAILLE);
-    affichageTabPoint(tabPoint,TAILLE);
-}
-
-void saisieTabPoint(point *tabPoint,int taille) {
-    int i=0;
-    for (i=0;i<taille;i++) {
-        tabPoint[i].num = i;
-
-        printf("Veuillez entrez la coord x du point %d \n",tabPoint[i].num);
-        scanf("%f",&tabPoint[i].x);
-
-        printf("Veuillez entrez la coord y du point %d \n",tabPoint[i].num);
-        scanf("%f",&tabPoint[i].y);
-        printf("\n");
-    }
-}
-
-void affichageTabPoint(point *tabPoint,int taille) {
-    int i=0;
-    for (i=0;i<taille;i++) {
-        printf("Point : %d\n",tabPoint[i].num);
-        printf("Coord x : %1.1f\n",tabPoint[i].x);
-        printf("Coord y : %1.1f\n",tabPoint[i].y);
-        printf("\n");
-    }
-}
