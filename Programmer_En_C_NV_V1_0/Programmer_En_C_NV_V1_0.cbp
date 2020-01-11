@@ -31,14 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Linker>
-			<Add library="../../SDL2-2.0.10/i686-w64-mingw32/lib/libSDL2.a" />
-			<Add library="../../SDL2-2.0.10/i686-w64-mingw32/lib/libSDL2.dll.a" />
-			<Add library="../../SDL2-2.0.10/i686-w64-mingw32/lib/libSDL2_test.a" />
-			<Add library="../../SDL2-2.0.10/i686-w64-mingw32/lib/libSDL2main.a" />
-		</Linker>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="method.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="method.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="type.h">
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>
 			<code_completion />
