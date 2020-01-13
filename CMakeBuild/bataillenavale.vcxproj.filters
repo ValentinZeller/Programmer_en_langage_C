@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Documents\Ludus\Programmation\C\Programmer_en_langage_C\Programmer_En_C_NV_V1_0\main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Documents\Ludus\Programmation\C\Programmer_en_langage_C\Programmer_En_C_NV_V1_0\method.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Documents\Ludus\Programmation\C\Programmer_en_langage_C\Programmer_En_C_NV_V1_0\type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Documents\Ludus\Programmation\C\Programmer_en_langage_C\Programmer_En_C_NV_V1_0\method.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Documents\Ludus\Programmation\C\Programmer_en_langage_C\Programmer_En_C_NV_V1_0\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{38124D6E-CED3-3FE3-9CA8-7B0DA8D8E1D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{91CCC320-6F67-36A9-8B1A-7E226B7BC6AE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
