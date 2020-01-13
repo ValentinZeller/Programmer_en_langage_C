@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include "flotte.h"
+#include "vue.h"
 
 int nVerifBateau(tCell cellule, tFlotte flotte);
 int nAttaque(tFlotte *flotte,int tabTouche[][TAILLE_GRILLE],int nJoueur);
