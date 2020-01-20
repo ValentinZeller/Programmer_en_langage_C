@@ -9,3 +9,5 @@
 *.o
 *.layout
 *.depend
+
+/CMakeBuild
