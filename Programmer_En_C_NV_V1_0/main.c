@@ -1,95 +1,46 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
+#include "pile.h"
+#include "file.h"
 
 //Les Types Abstraits de Données
 
-typedef struct Element Element;
-struct Element
+int main()
+//BUT : Utiliser les méthodes de gestion de la pile et de la file
 {
-    int nombre;
-    Element *suivant;
-};
+    //Les Piles (LIFO)
+    tPile *pMaPile = initialiserPile();
 
-typedef struct Pile Pile;
-struct Pile
-{
-    Element *premier;
-};
+    empiler(pMaPile, 13);
+    empiler(pMaPile, 12);
+    empiler(pMaPile, 56);
+    empiler(pMaPile, 42);
 
-Pile *initialiser();
-void empiler(Pile *pile, int nvNombre);
-int depiler(Pile *pile);
-void afficherPile(Pile *pile);
-
-int main ()
-{
-    Pile *maPile = initialiser();
-    empiler(maPile, 4);
-    empiler(maPile, 8);
-    empiler(maPile, 15);
-    empiler(maPile, 16);
-    empiler(maPile, 23);
-    empiler(maPile, 42);
     printf("\nEtat de la pile :\n");
-    afficherPile(maPile);
-    printf("Je depile %d\n", depiler(maPile));
-    printf("Je depile %d\n", depiler(maPile));
+    afficherPile(pMaPile);
+
+    printf("Je depile %d\n", depiler(pMaPile));
+    printf("Je depile %d\n", depiler(pMaPile));
+
     printf("\nEtat de la pile :\n");
-    afficherPile(maPile);
+    afficherPile(pMaPile);
+
+    //Les Files (FIFO)
+
+    tFile *pMaFile = initialiserFile();
+    enfiler(pMaFile,2);
+    enfiler(pMaFile,3);
+    enfiler(pMaFile,4);
+    enfiler(pMaFile,5);
+
+    printf("\nEtat de la file : \n");
+    afficherFile(pMaFile);
+
+    printf("Je defile %d\n", defiler(pMaFile));
+    printf("Je defile %d\n", defiler(pMaFile));
+
+    printf("\nEtat de la file : \n");
+    afficherFile(pMaFile);
 
     return 0;
 }
 
-Pile *initialiser()
-{
-    Pile *pile = malloc(sizeof(*pile));
-    pile->premier = NULL;
-    return pile;
-}
-
-void empiler(Pile *pile, int nvNombre)
-{
-    Element *nouveau = malloc(sizeof(*nouveau));
-    if (pile == NULL || nouveau == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
-    nouveau->nombre = nvNombre;
-    nouveau->suivant = pile->premier;
-    pile->premier = nouveau;
-}
-
-int depiler(Pile *pile)
-{
-    if (pile == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
-    int nombreDepile = 0;
-    Element *elementDepile = pile->premier;
-    if (pile != NULL && pile->premier != NULL)
-    {
-        nombreDepile = elementDepile->nombre;
-        pile->premier = elementDepile->suivant;
-        free(elementDepile);
-    }
-    return nombreDepile;
-
-}
-
-void afficherPile(Pile *pile)
-{
-    if (pile == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
-    Element *actuel = pile->premier;
-
-    while (actuel != NULL)
-    {
-        printf("%d\n", actuel->nombre);
-        actuel = actuel->suivant;
-    }
-    printf("\n");
-}
