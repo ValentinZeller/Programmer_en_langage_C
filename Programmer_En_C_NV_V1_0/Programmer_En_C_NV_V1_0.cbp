@@ -31,18 +31,32 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="bateau.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bateau.h" />
+		<Unit filename="cellule.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cellule.h" />
+		<Unit filename="flotte.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="flotte.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="method.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="method.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="method.h" />
 		<Unit filename="type.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="vue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

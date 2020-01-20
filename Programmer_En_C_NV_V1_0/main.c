@@ -1,5 +1,4 @@
-#include "define.h"
-#include "vue.h"
+#include "method.h"
 
 int main ()
 {
