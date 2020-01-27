@@ -6,6 +6,7 @@
 
 typedef struct tElementPile tElementPile;
 struct tElementPile
+//Type structuré récursif (ou autoréférentiel), appele un élément de même type/genre
 //Type structuré pour un élément de la pile
 //Stock une valeur entière et le pointeur vers l'élément suivant (inséré juste avant)
 {

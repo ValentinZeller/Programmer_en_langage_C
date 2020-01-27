@@ -1,45 +1,33 @@
 #include <math.h>
 #include "pile.h"
 #include "file.h"
+#include "liste_db_chaine.h"
 
-//Les Types Abstraits de Données
 
 int main()
-//BUT : Utiliser les méthodes de gestion de la pile et de la file
+//Stock des game objets, pour l'affichage dans la vue, sous un modèle de données abstraits : liste doublement chainée
 {
-    //Les Piles (LIFO)
-    tPile *pMaPile = initialiserPile();
+    Gameobjet Obj,Obj2,Obj3;
+    ListeDChaine ListeObj;
+    initialiserListe(&ListeObj);
 
-    empiler(pMaPile, 13);
-    empiler(pMaPile, 12);
-    empiler(pMaPile, 56);
-    empiler(pMaPile, 42);
+    Obj.key = 1;
+    Obj.mesh = "Mesh1";
+    Obj.pos.x = 0;
+    Obj.pos.y = 0;
+    Obj.pos.z = 0;
 
-    printf("\nEtat de la pile :\n");
-    afficherPile(pMaPile);
+    Obj2 = Obj;
+    Obj2.key = 2;
+    Obj3 = Obj;
+    Obj3.key = 3;
 
-    printf("Je depile %d\n", depiler(pMaPile));
-    printf("Je depile %d\n", depiler(pMaPile));
-
-    printf("\nEtat de la pile :\n");
-    afficherPile(pMaPile);
-
-    //Les Files (FIFO)
-
-    tFile *pMaFile = initialiserFile();
-    enfiler(pMaFile,2);
-    enfiler(pMaFile,3);
-    enfiler(pMaFile,4);
-    enfiler(pMaFile,5);
-
-    printf("\nEtat de la file : \n");
-    afficherFile(pMaFile);
-
-    printf("Je defile %d\n", defiler(pMaFile));
-    printf("Je defile %d\n", defiler(pMaFile));
-
-    printf("\nEtat de la file : \n");
-    afficherFile(pMaFile);
+    insDansListeDVide(&ListeObj,Obj);
+    insDebutListeD(&ListeObj,Obj2);
+    insApresD(&ListeObj,Obj3,1);
+    afficheListeD(&ListeObj);
+    suppD(&ListeObj,1);
+    afficheListeD(&ListeObj);
 
     return 0;
 }
