@@ -1,5 +1,6 @@
 #ifndef GAMEOBJET_H_INCLUDED
 #define GAMEOBJET_H_INCLUDED
+#include <stdio.h>
 
 //Game Objet
 typedef struct Vect3 {
@@ -12,6 +13,7 @@ typedef struct Gameobjet {
     Vect3 pos;
 }Gameobjet;
 
-void afficherGameObjet(Gameobjet objet);
+extern void afficherGameObjet(Gameobjet objet);
+extern void createGameObjet(Gameobjet *pObjet,int nKey,char *cMesh,int nX,int nY,int nZ);
 
 #endif // GAMEOBJET_H_INCLUDED

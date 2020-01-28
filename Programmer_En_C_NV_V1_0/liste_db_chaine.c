@@ -2,26 +2,29 @@
 #include <stdio.h>
 #include "liste_db_chaine.h"
 
-void initialiserListe(ListeDChaine *liste) {
+void initialiserListeD(ListeDChaine *liste) {
+    //Initialisation de la liste doublement chaine
     liste = malloc(sizeof(liste));
     liste->debut = NULL;
     liste->fin = NULL;
     liste->taille =0;
 }
 
-int insDansListeDVide (ListeDChaine * liste, Gameobjet gameobjet){
+int ajoutDansListeDVide (ListeDChaine * liste, Gameobjet gameobjet){
 
-    Element *nouveau_element;
+    Element *pNouveauElement;
 
-    if ((nouveau_element =  (Element*) malloc(sizeof(Element))) == NULL) return -1;
+    if ((pNouveauElement =  (Element*) malloc(sizeof(Element))) == NULL) {
+        return 1;
+    }
 
-    nouveau_element->objet=gameobjet;
+    pNouveauElement->objet=gameobjet;
 
-    nouveau_element->precedent = liste->debut;
-    nouveau_element->suivant = liste->fin;
+    pNouveauElement->precedent = liste->debut;
+    pNouveauElement->suivant = liste->fin;
 
-    liste->debut = nouveau_element;
-    liste->fin = nouveau_element;
+    liste->debut = pNouveauElement;
+    liste->fin = pNouveauElement;
 
     liste->taille++;
 
@@ -29,20 +32,21 @@ return 0;
 
 }
 
-int insDebutListeD (ListeDChaine * liste, Gameobjet gameobjet){
+int ajoutDebutListeD (ListeDChaine * liste, Gameobjet gameobjet){
 
-    Element *nouveau_element;
+    Element *pNouveauElement;
 
-    if ((nouveau_element =  (Element*) malloc(sizeof(Element))) == NULL)
-    return -1;
+    if ((pNouveauElement =  (Element*) malloc(sizeof(Element))) == NULL) {
+        return 1;
+    }
 
-    nouveau_element->objet=gameobjet;
+    pNouveauElement->objet=gameobjet;
 
-    nouveau_element->precedent = NULL;
-    nouveau_element->suivant = liste->debut;
+    pNouveauElement->precedent = NULL;
+    pNouveauElement->suivant = liste->debut;
 
-    liste->debut->precedent = nouveau_element;
-    liste->debut = nouveau_element;
+    liste->debut->precedent = pNouveauElement;
+    liste->debut = pNouveauElement;
 
     liste->taille++;
 
@@ -51,20 +55,21 @@ int insDebutListeD (ListeDChaine * liste, Gameobjet gameobjet){
 }
 
 
-int insFinListeD (ListeDChaine * liste, Gameobjet gameobjet){
+int ajoutFinListeD (ListeDChaine * liste, Gameobjet gameobjet){
 
-    Element *nouveau_element;
+    Element *pNouveauElement;
 
-     if ((nouveau_element =  (Element*) malloc(sizeof(Element))) == NULL)
-        return -1;
+    if ((pNouveauElement =  (Element*) malloc(sizeof(Element))) == NULL) {
+        return 1;
+    }
 
-    nouveau_element->objet=gameobjet;
+    pNouveauElement->objet=gameobjet;
 
-    nouveau_element->suivant = NULL;
-    nouveau_element->precedent = liste->fin;
-    liste->fin->suivant = nouveau_element;
+    pNouveauElement->suivant = NULL;
+    pNouveauElement->precedent = liste->fin;
+    liste->fin->suivant = pNouveauElement;
 
-    liste->fin = nouveau_element;
+    liste->fin = pNouveauElement;
     liste->taille++;
 
 
@@ -72,133 +77,126 @@ return 0;
 
 }
 
-int insAvantD (ListeDChaine * liste, Gameobjet gameobjet, int pos){
+int ajoutAvantPosListeD (ListeDChaine * liste, Gameobjet gameobjet, int nPos){
     int i;
-    Element *nouveau_element, *courant;
+    Element *pNouveauElement, *pCourant;
 
-   if ((nouveau_element =  (Element*) malloc(sizeof(Element))) == NULL)
-        return -1;
+    if ((pNouveauElement =  (Element*) malloc(sizeof(Element))) == NULL) {
+        return 1;
+    }
 
 
-    nouveau_element->objet=gameobjet;
+    pNouveauElement->objet=gameobjet;
 
-    courant = liste->debut;
+    pCourant = liste->debut;
 
-    for (i = 1; i < pos; ++i)
-        courant = courant->suivant;
+    for (i = 1; i < nPos; ++i) {
+        pCourant = pCourant->suivant;
 
-        nouveau_element->suivant = courant;
-        nouveau_element-> precedent = courant->precedent;
+        pNouveauElement->suivant = pCourant;
+        pNouveauElement-> precedent = pCourant->precedent;
 
-        if(courant->precedent == NULL)
-            liste->debut = nouveau_element;
-        else courant->precedent->suivant = nouveau_element;
-            courant->precedent = nouveau_element;
+        if(pCourant->precedent == NULL)
+            liste->debut = pNouveauElement;
+        else pCourant->precedent->suivant = pNouveauElement;
+            pCourant->precedent = pNouveauElement;
 
         liste->taille++;
+    }
 
 return 0;
 
 }
 
-int insApresD (ListeDChaine * liste,Gameobjet gameobjet, int pos){
+int ajoutApresPosListeD (ListeDChaine * liste,Gameobjet gameobjet, int nPos){
 
     int i;
-    Element *nouveau_element, *courant;
+    Element *pNouveauElement, *pCourant;
 
-      if ((nouveau_element =  (Element*) malloc(sizeof(Element))) == NULL)
+    if ((pNouveauElement =  (Element*) malloc(sizeof(Element))) == NULL) {
         return -1;
+    }
 
-    nouveau_element->objet=gameobjet;
+    pNouveauElement->objet=gameobjet;
 
-    courant = liste->debut;
+    pCourant = liste->debut;
 
-    for (i = 1; i < pos; ++i)
-        courant = courant->suivant;
+    for (i = 1; i < nPos; ++i) {
+        pCourant = pCourant->suivant;
+    }
 
-    nouveau_element->suivant = courant->suivant;
-    nouveau_element->precedent = courant;
+    pNouveauElement->suivant = pCourant->suivant;
+    pNouveauElement->precedent = pCourant;
 
-    if(courant->suivant == NULL)
-        liste->fin = nouveau_element;
-    else
-        courant->suivant->precedent = nouveau_element;
+    if(pCourant->suivant == NULL) {
+        liste->fin = pNouveauElement;
+    } else {
+        pCourant->suivant->precedent = pNouveauElement;
+    }
 
-    courant->suivant = nouveau_element;
+    pCourant->suivant = pNouveauElement;
     liste->taille++;
 
     return 0;
 }
 
-int suppD(ListeDChaine *liste, int pos){
+int suppPosListeD(ListeDChaine *liste, int nPos){
+    int i;
+    Element *pElementSupprime,*pCourant;
 
-        int i;
-        Element *supp_element,*courant;
+    if(liste->taille == 0) {
+        return 1;
+    }
 
-        if(liste->taille == 0) return -1;
+    if(nPos == 1){
+    //Cas où on enlève le premier element de la liste
+        pElementSupprime = liste->debut;
+        liste->debut = liste->debut->suivant;
 
-            if(pos == 1){ /* suppresion de 1er élément */
-
-                supp_element = liste->debut;
-
-                liste->debut = liste->debut->suivant;
-
-                if(liste->debut == NULL)
-                    liste->fin = NULL;
-                else
-                    liste->debut->precedent = NULL;
-
-
-           }else if(pos == liste->taille){ /* suppression du dernier élément */
-
-               supp_element = liste->fin;
-               liste->fin->precedent->suivant = NULL;
-               liste->fin = liste->fin->precedent;
-
-            }else { /* suppression ailleurs */
-                    courant = liste->debut;
-
-                    for(i=1;i<pos;++i)
-                        courant = courant->suivant;
-
-                    supp_element = courant;
-                    courant->precedent->suivant = courant->suivant;
-                    courant->suivant->precedent = courant->precedent;
-            }
+        if(liste->debut == NULL) {
+            liste->fin = NULL;
+        }else{
+            liste->debut->precedent = NULL;
+        }
 
 
-            free(supp_element);
-            liste->taille--;
+    }else if(nPos == liste->taille){
+    //Cas où on enlève le dernier element de la liste
+        pElementSupprime = liste->fin;
+        liste->fin->precedent->suivant = NULL;
+        liste->fin = liste->fin->precedent;
+
+    }else {
+        pCourant = liste->debut;
+
+        for(i=1;i<nPos;++i) {
+            pCourant = pCourant->suivant;
+            pElementSupprime = pCourant;
+            pCourant->precedent->suivant = pCourant->suivant;
+            pCourant->suivant->precedent = pCourant->precedent;
+        }
+    }
+    free(pElementSupprime);
+    liste->taille--;
+
 return 0;
 }
 
 
-void detruire(ListeDChaine *liste){
-
-        while(liste->taille > 0)
-            suppD(liste,1);
+void suppListeD(ListeDChaine *liste){
+    while(liste->taille > 0) {
+        suppPosListeD(liste,1);
+    }
 }
 
 void afficheListeD(ListeDChaine *liste){
-    Element *courant;
-    courant = liste->debut;
-    printf("[ ");
-        while(courant != NULL){
-                afficherGameObjet(courant->objet);
-                courant = courant->suivant;
-        }
-    printf("]\n");
-}
+    Element *pCourant;
+    pCourant = liste->debut;
 
-
-void affiche_invListeD(ListeDChaine *liste){
-
-    Element *courant;
-    courant = liste->fin;
-    while(courant != NULL){
-            printf("%d : ",courant->objet.key);
-            courant = courant->precedent;
+    while(pCourant != NULL){
+        afficherGameObjet(pCourant->objet);
+        printf("\n");
+        pCourant = pCourant->suivant;
     }
-    printf("\n");
 
 }

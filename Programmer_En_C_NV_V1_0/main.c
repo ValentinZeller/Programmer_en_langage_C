@@ -1,33 +1,39 @@
-#include <math.h>
-#include "pile.h"
-#include "file.h"
 #include "liste_db_chaine.h"
-
 
 int main()
 //Stock des game objets, pour l'affichage dans la vue, sous un modèle de données abstraits : liste doublement chainée
 {
-    Gameobjet Obj,Obj2,Obj3;
-    ListeDChaine ListeObj;
-    initialiserListe(&ListeObj);
+    Gameobjet Obj,Obj2,Obj3; //Création des gameobjets
+    ListeDChaine ListeObj; // Création de la liste doublement chainee
+    initialiserListeD(&ListeObj); //Initialisation de la liste dchaine
 
-    Obj.key = 1;
-    Obj.mesh = "Mesh1";
-    Obj.pos.x = 0;
-    Obj.pos.y = 0;
-    Obj.pos.z = 0;
+    //Initialiation des game objets
+    createGameObjet(&Obj,1,"Mesh1",0,0,0);
+    createGameObjet(&Obj2,2,"Mesh2",2,0,2);
+    createGameObjet(&Obj3,3,"Mesh3",0,3,1);
 
-    Obj2 = Obj;
-    Obj2.key = 2;
-    Obj3 = Obj;
-    Obj3.key = 3;
+    ajoutDansListeDVide(&ListeObj,Obj); // Ajout d'un gameobjet dans la liste
 
-    insDansListeDVide(&ListeObj,Obj);
-    insDebutListeD(&ListeObj,Obj2);
-    insApresD(&ListeObj,Obj3,1);
+    printf("Etat de la Liste Doublement Chainee : \n");
     afficheListeD(&ListeObj);
-    suppD(&ListeObj,1);
+
+    ajoutDebutListeD(&ListeObj,Obj2); //Ajout d'un gameobjet au debut de la liste
+    ajoutApresPosListeD(&ListeObj,Obj3,1); //Ajout d'un gameobjet après la position 1 (position 2)
+
+    printf("Etat de la Liste Doublement Chainee : \n");
     afficheListeD(&ListeObj);
+
+    suppPosListeD(&ListeObj,2); //Gameobjet à la position 1 supprimé
+
+    printf("Etat de la Liste Doublement Chainee : \n");
+    afficheListeD(&ListeObj);
+
+    ajoutAvantPosListeD(&ListeObj,Obj3,2);
+
+    printf("Etat de la Liste Doublement Chainee : \n");
+    afficheListeD(&ListeObj);
+
+    suppListeD(&ListeObj);
 
     return 0;
 }

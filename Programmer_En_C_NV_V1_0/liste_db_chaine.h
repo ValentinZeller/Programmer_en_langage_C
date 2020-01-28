@@ -1,6 +1,8 @@
 #ifndef LISTE_DB_CHAINE_H_INCLUDED
 #define LISTE_DB_CHAINE_H_INCLUDED
 #include "gameobjet.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct Element {
     struct Element *suivant;
@@ -14,24 +16,17 @@ typedef struct ListeDChaine {
     int taille;
 }ListeDChaine;
 
+extern void initialiserListeD(ListeDChaine *liste);
 
-#include <stdlib.h>
-#include <stdio.h>
-#include "liste_db_chaine.h"
+extern int ajoutDansListeDVide (ListeDChaine * liste, Gameobjet gameobjet);
+extern int ajoutDebutListeD (ListeDChaine * liste, Gameobjet gameobjet);
+extern int ajoutFinListeD (ListeDChaine * liste, Gameobjet gameobjet);
+extern int ajoutAvantPosListeD(ListeDChaine * liste, Gameobjet gameobjet, int pos);
+extern int ajoutApresPosListeD (ListeDChaine * liste,Gameobjet gameobjet, int pos);
 
-void initialiserListe(ListeDChaine *liste);
+extern int suppPosListeD(ListeDChaine *liste, int pos);
+extern void suppListeD(ListeDChaine *liste);
 
-int insDansListeDVide (ListeDChaine * liste, Gameobjet gameobjet);
-int insDebutListeD (ListeDChaine * liste, Gameobjet gameobjet);
-int insFinListeD (ListeDChaine * liste, Gameobjet gameobjet);
-int insAvantD (ListeDChaine * liste, Gameobjet gameobjet, int pos);
-int insApresD (ListeDChaine * liste,Gameobjet gameobjet, int pos);
-
-int suppD(ListeDChaine *liste, int pos);
-void detruire(ListeDChaine *liste);
-
-void afficheListeD(ListeDChaine *liste);
-void affiche_invListeD(ListeDChaine *liste);
-
+extern void afficheListeD(ListeDChaine *liste);
 
 #endif // LISTE_DB_CHAINE_H_INCLUDED

@@ -41,6 +41,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="file.h" />
+		<Unit filename="gameobjet.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="gameobjet.h" />
 		<Unit filename="liste_db_chaine.c">
 			<Option compilerVar="CC" />
