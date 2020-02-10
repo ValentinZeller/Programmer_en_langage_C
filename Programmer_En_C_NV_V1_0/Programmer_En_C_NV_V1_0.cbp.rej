@@ -1,0 +1,19 @@
+diff a/Programmer_En_C_NV_V1_0/Programmer_En_C_NV_V1_0.cbp b/Programmer_En_C_NV_V1_0/Programmer_En_C_NV_V1_0.cbp	(rejected hunks)
+@@ -37,9 +37,17 @@
+ 			<Add library="../../SDL2-2.0.10/i686-w64-mingw32/lib/libSDL2_test.a" />
+ 			<Add library="../../SDL2-2.0.10/i686-w64-mingw32/lib/libSDL2main.a" />
+ 		</Linker>
++		<Unit filename="file.c">
++			<Option compilerVar="CC" />
++		</Unit>
++		<Unit filename="file.h" />
+ 		<Unit filename="main.c">
+ 			<Option compilerVar="CC" />
+ 		</Unit>
++		<Unit filename="pile.c">
++			<Option compilerVar="CC" />
++		</Unit>
++		<Unit filename="pile.h" />
+ 		<Extensions>
+ 			<code_completion />
+ 			<envvars />

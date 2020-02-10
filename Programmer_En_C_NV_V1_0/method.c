@@ -19,7 +19,8 @@ void Bataille() {
 
     //Saisie utilisateur des flottes
     saisirFlotte(&Tflotte1,1);
-    saisirFlotte(&Tflotte2,2);
+    //saisirFlotte(&Tflotte2,2);
+    Tflotte2 = Tflotte1;
 
     //Initilisation des tableaux
     initTabTouche(tabToucheJ1);
